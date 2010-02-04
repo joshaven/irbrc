@@ -1,24 +1,55 @@
-h1. How to install
+h1. Joshaven's irbrc
 
-# Install the prerequisite ruby gems: "map_by_method":http://drnicutilities.rubyforge.org/map_by_method/, "wirble":http://pablotron.org/software/wirble/, "what_methods":http://redhanded.hobix.com/inspect/stickItInYourIrbrcMethodfinder.html
-# Clone this repo using git
-  	<pre>git clone git://github.com/logankoester/irbrc.git ~/projects/irbrc</pre>
-# Symlink the file to ~/.irbrc
-  	<pre>ln -s ~/projects/irbrc/irbrc ~/.irbrc</pre>
-# Run 'irb' and enjoy!
+Installing Joshaven's irbrc will modify the default environment of your irb "Interactive Ruby" console environment (see Features).  This project comes with an install and uninstall method that is quite simple.  I encourage you to try it out.
 
-These settings will also affect your script/console sessions in Rails
+I trust that this project will make your Ruby development experience richer.  If you have any questions or comments please feel free to contact me.
 
-h2. What it does
-* Sets a shorter prompt (">>")
-* Saves your command history between irb sessions
-* Adds color highlighting to your output
-* Type "clear" to clear the screen (or just "c")
-* Enables automatic indentation
-* Loads Rubygems for you
-* Loads "Dr Nic's":http://github.com/drnic "map_by_method":http://drnicutilities.rubyforge.org/map_by_method/
-* Loads "Dr Nic's":http://github.com/drnic "what_methods":http://redhanded.hobix.com/inspect/stickItInYourIrbrcMethodfinder.html
-* Loads pp (pretty print)
-* Loads readline
-* Implements Object.pm, which pretty prints the methods of an object
-* Sketches - http://sketches.rubyforge.org/
+Sincerely,
+Joshaven Potter <yourtech@gmail.com>
+
+h2. Features
+
+* Auto-Reloading of irb when the source files change (Sketches - http://sketches.rubyforge.org/)
+* Auto-Loads many environments based upon the working directory (rails, development gems, cilantro, & other)
+* IRB History
+* Highlighting
+* Automatic Indentation
+* Shorter Prompt (">>")
+* "clear" & "c" methods to clear the screen
+* Pre-loads pp & readline
+* Implements Object.pm, which pretty prints the methods of an object... try: [1,2].pm
+
+h2. Install
+
+# Copy and paste the following into your terminal:
+<pre><code>mkdir -p ~/.sbin
+git clone git://github.com/joshaven/irbrc.git ~/.sbin/irbrc
+ruby ~/.sbin/irbrc/setup.rb</code></pre>
+# Run 'irb' and enjoy!  Don't worry anymore about running "script/console" or requiring "lib/init.rb".
+<pre><code>irb</code></pre>
+
+h2. Notice
+
+Do *not* remove the source code for this project, it is required for operation.
+
+If your in the root of project directory then the project will (probably) be loaded... For instance, if you are in the root of Rails project you can simply type `irb` to open irb in Rails console mode.  If your project is not a Rails project, irb will attempt to load your environment using other conventions.  Inspect the source for details.
+
+
+h2. Uninstall
+
+To uninstall you should simply run the uninstall file...  The uninstall file will deal with restoring your previous irbrc file as well as cleaning up after its self.
+<pre><code>ruby ~/.sbin/irbrc/uninstall.rb</code></pre>
+
+h2. License
+
+Joshaven's irbrc - An irb configuration file
+
+Copyright (c) 2010 Joshaven Potter (yourtech at gmail.com)
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software
+
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
