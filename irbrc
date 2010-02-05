@@ -1,13 +1,9 @@
-# Make gems available
-require 'rubygems'
-
-# http://drnicutilities.rubyforge.org/map_by_method/
-require 'map_by_method'
-
-# Dr Nic's gem inspired by
-# http://redhanded.hobix.com/inspect/stickItInYourIrbrcMethodfinder.html
-require 'what_methods'
-
+# Written by Joshaven Potter http://github.com/joshaven/irbrc
+# Forked from: http://github.com/logankoester/irbrc
+#
+# Please read the included README.textile
+message = []
+message << "Joshaven's IRB http://github.com/joshaven/irbrc"
 # Pretty Print method
 require 'pp'
 
@@ -30,21 +26,29 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 
 # Wirble is a set of enhancements for irb
 # http://pablotron.org/software/wirble/README
-# Implies require 'pp', 'irb/completion', and 'rubygems'
-require 'wirble'
-Wirble.init
-
-# Enable colored output
-Wirble.colorize
+# Implies require 'pp', 'irb/completion'
+begin
+  # load wirble library file
+  require File.join(File.dirname(File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__), 'lib', 'wirble')
+  
+  # Note: you could use the wirble gem if you wanted to install it and require rubygems
+  Wirble.init
+  
+  # Enable colored output
+  Wirble.colorize
+  message << " - Wirble loaded... colorized output."
+rescue
+  message << " ! Wirble not loaded, colorization is disabled."
+end
 
 # Clear the screen
 def clear
-	system 'clear'
-	if ENV['RAILS_ENV']
-		return "Rails environment: " + ENV['RAILS_ENV']
-	else
-		return "No rails environment - happy hacking!";
-	end
+  system 'clear'
+  if ENV['RAILS_ENV']
+    return "Rails environment: " + ENV['RAILS_ENV']
+  else
+    return "No rails environment - happy hacking!";
+  end
 end
 
 # Shortcuts
@@ -117,5 +121,47 @@ class Object
 end
 
 # http://sketches.rubyforge.org/
-require 'sketches'
-Sketches.config :editor => 'gvim'
+begin
+  # load sketches library file
+  require File.join(File.dirname(File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__), 'lib', 'sketches')
+
+  Sketches.config :editor => ENV['EDITOR'] || 'nano'
+  message << " - Sketches loaded... source file reloading on change."
+rescue
+  message << " ! Auto reloading of your project is disabled.  Sketches not loaded."
+end
+
+### Auto-Load environments
+current_path = Dir.pwd
+working_dir = current_path.split(File::Separator).last
+ 
+# Load Cilantro apps:  http://github.com/dcparker/cilantro
+if File.exists?('lib/cilantro.rb')
+  require 'lib/cilantro'
+  Cilantro.load_environment(:irb)
+  message << " - Cilantro loaded."
+ 
+# load Rails apps:  http://www.rubyonrails.org
+elsif File.exists?('script/console') && File.exists?('config/boot.rb')
+  unless Object.const_defined?("RAILS_ROOT")
+    require 'config/boot' unless Object.const_defined?("RAILS_ROOT")
+    require 'commands/console' if ENV['RAILS_ENV'].nil?
+    message << " - Rails loaded."
+  end
+ 
+# load other apps
+elsif File.exists?('config/init.rb')
+  require 'config/init.rb'
+  message << ' - config/init.rb loaded.'
+ 
+# load under-development gems
+elsif File.exists?("lib/#{working_dir}.rb")
+  require "lib/#{working_dir}"
+  message << " - ./lib/#{working_dir}.rb loaded."
+ 
+# Load else
+else
+  # silence is ok
+end
+
+puts message.join("\n")
