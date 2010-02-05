@@ -20,8 +20,8 @@
 #++
 #
 
-require 'sketches/config'
-require 'sketches/cache'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'config')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'cache')
 
 module Sketches
   #

@@ -20,7 +20,7 @@
 #++
 #
 
-require 'sketches/config'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'config')
 
 require 'tempfile'
 

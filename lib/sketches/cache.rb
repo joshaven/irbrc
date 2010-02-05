@@ -20,9 +20,9 @@
 #++
 #
 
-require 'sketches/exceptions/unknown_sketch'
-require 'sketches/config'
-require 'sketches/sketch'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'exceptions', 'unknown_sketch')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'config')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'sketch')
 
 require 'thread'
 

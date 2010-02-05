@@ -20,5 +20,5 @@
 #++
 #
 
-require 'sketches/exceptions/unknown_sketch'
-require 'sketches/exceptions/editor_not_defined'
+require File.join(File.dirname(__FILE__), 'exceptions', 'unknown_sketch')
+require File.join(File.dirname(__FILE__), 'exceptions', 'editor_not_defined')

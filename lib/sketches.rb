@@ -20,6 +20,6 @@
 #++
 #
 
-require 'sketches/extensions'
-require 'sketches/sketches'
-require 'sketches/version'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'sketches', 'extensions')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'sketches', 'sketches')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'sketches', 'version')

@@ -20,9 +20,9 @@
 #++
 #
 
-require 'sketches/exceptions/editor_not_defined'
-require 'sketches/config'
-require 'sketches/temp_sketch'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'exceptions', 'editor_not_defined')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'config')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'temp_sketch')
 
 require 'thread'
 require 'fileutils'
