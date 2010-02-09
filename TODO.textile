@@ -1,0 +1,3 @@
+Evaluate using FileMonitor over sketches.
+
+Add server method to Object... so that from within an irb session one could type 'server' which would launch a background process (reporting to the console).  This method would would be dependent upon the flavor of the framework...
